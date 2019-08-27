@@ -1,7 +1,8 @@
 package Modelo;
 
 public class SubTipoMovimiento {
-
+    private static int INGRESO = 1;
+    private static int EGRESO = 2;
     private int id;
     private String descripcion;
 

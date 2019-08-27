@@ -21,15 +21,18 @@ public class Movimiento {
     //tipo de moneda con la que cobre/vendi algo
     private Moneda moneda;
     //forma de pago
-    private TipoPago tipoDePago;
+    private TipoPago tipoPago;
     //cuando se vence la deuda
     private Date fechaVencimiento;
+    private Proveedor proveedor;
+    private Cliente cliente;
 
     public Movimiento() {
     }
 
     public Movimiento(Date fecha, float monto, String descripcion, TipoMovimiento tipoMovimientos,
-                      SubTipoMovimiento subTipoMovimiento, float cotizacion, Moneda moneda, TipoPago tipoPago, Date fechaVencimiento) {
+                      SubTipoMovimiento subTipoMovimiento, float cotizacion, Moneda moneda, TipoPago tipoPago,
+                      Date fechaVencimiento, Proveedor proveedor, Cliente cliente) {
         this.fecha = fecha;
         this.monto = monto;
         this.descripcion = descripcion;
@@ -37,8 +40,10 @@ public class Movimiento {
         this.subTipoMovimiento = subTipoMovimiento;
         this.cotizacion = cotizacion;
         this.moneda = moneda;
-        tipoDePago = tipoPago;
+        this.tipoPago = tipoPago;
         this.fechaVencimiento = fechaVencimiento;
+        this.proveedor = proveedor;
+        this.cliente = cliente;
     }
 
     public Date getFecha() {
@@ -100,11 +105,11 @@ public class Movimiento {
 
 
     public TipoPago getTipoPago() {
-        return tipoDePago;
+        return tipoPago;
     }
 
     public void setTipoPago(TipoPago tipoPago) {
-        tipoDePago = tipoPago;
+        this.tipoPago = tipoPago;
     }
 
     public Date getFechaVencimiento() {
@@ -113,6 +118,22 @@ public class Movimiento {
 
     public void setFechaVencimiento(Date fechaVencimiento) {
         this.fechaVencimiento = fechaVencimiento;
+    }
+
+    public Proveedor getProveedor() {
+        return proveedor;
+    }
+
+    public void setProveedor(Proveedor proveedor) {
+        this.proveedor = proveedor;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
     @Override
@@ -125,8 +146,10 @@ public class Movimiento {
                 ", SubTipoMovimiento=" + this.subTipoMovimiento +
                 ", cotizacion=" + this.cotizacion +
                 ", moneda=" + this.moneda +
-                ", tipoPago=" + tipoDePago +
+                ", tipoPago=" + this.tipoPago +
                 ", fechaVencimiento=" + this.fechaVencimiento +
+                ", proveedor" + this.proveedor +
+                ", cliente" + this.cliente +
                 '}';
     }
 }

@@ -49,7 +49,4 @@ public class Moneda {
                 ", tipoPago=" + this.tipoPago +
                 '}';
     }
-
-    private class TipoPago {
-    }
 }
