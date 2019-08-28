@@ -115,11 +115,13 @@ public class ControlMovimientos {
             if (movimiento.getFecha().compareTo(fechaInicio) > 0
                     && movimiento.getFecha().compareTo(fechaFin) < 0) {
                 if (movimiento.getCliente() != null) {
-                    DeudaXClienteProveedor _deudaCliente = new DeudaXClienteProveedor(movimiento.getCliente(), null, movimiento.getTipoMovimientos(), movimiento.getMonto());
+                    DeudaXClienteProveedor _deudaCliente = new DeudaXClienteProveedor(movimiento.getCliente(),
+                            null, movimiento.getTipoMovimientos(), movimiento.getMonto());
                     auxDeuda.add(_deudaCliente);
                 }
                 if (movimiento.getProveedor() != null) {
-                    DeudaXClienteProveedor _deudaProveedor = new DeudaXClienteProveedor(null, movimiento.getProveedor(), movimiento.getTipoMovimientos(), movimiento.getMonto());
+                    DeudaXClienteProveedor _deudaProveedor = new DeudaXClienteProveedor(null, movimiento.getProveedor(),
+                            movimiento.getTipoMovimientos(), movimiento.getMonto());
                     auxDeuda.add(_deudaProveedor);
                 }
             }
@@ -165,6 +167,31 @@ public class ControlMovimientos {
 
         }
         return deudaFinal = _deudaParcial;
+    }
+
+    public ArrayList<DeudaXClienteProveedor> clienteProveedorConMayorDeuda(Date fechaInicio, Date fechaFin){
+        ArrayList<DeudaXClienteProveedor> auxDeuda = this.deudaXAcreedor(fechaInicio, fechaFin);
+        ArrayList<DeudaXClienteProveedor> mayorDeuda = new ArrayList<>();
+        int i;
+        int flag = 0;
+        float deuda = auxDeuda.get(0).getDeuda();
+
+        for (i=1; i < auxDeuda.size(); i++){
+            if (deuda < auxDeuda.get(i).getDeuda()){
+                deuda = auxDeuda.get(i).getDeuda();
+                flag = i;
+            }
+        }
+        if (auxDeuda.get(flag).get_cliente() != null){
+            mayorDeuda.add(new DeudaXClienteProveedor(auxDeuda.get(flag).get_cliente(),null,
+                    auxDeuda.get(flag).getTipoMovimiento(), deuda));
+        }else if (auxDeuda.get(flag).get_proveedor() != null) {
+            mayorDeuda.add(new DeudaXClienteProveedor(null, auxDeuda.get(flag).get_proveedor(),
+                    auxDeuda.get(flag).getTipoMovimiento(), deuda));
+
+        }
+
+        return mayorDeuda;
     }
 
 }
