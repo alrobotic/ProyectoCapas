@@ -84,11 +84,28 @@ public class ControlMovimientos {
         ArrayList<Movimiento> aux = new ArrayList<>();
 
         for (Movimiento movimiento : _movimientos) {
-            if (movimiento.getCliente() != null)
-                    && movimiento.getTipoMovimientos().getId() == 1 ) {
-                aux.add(movimiento);
+            if (movimiento.getFecha().compareTo(fechaInicio) > 0
+                && movimiento.getFecha().compareTo(fechaFin) < 0) {
+                if (movimiento.getCliente() != null
+                        && movimiento.getCliente().getId() == id ) {
+                    Movimiento movCliente = new Movimiento();
+                    movCliente.setFecha(movimiento.getFecha());
+                    movCliente.setDescripcion(movimiento.getDescripcion());
+                    movCliente.setMonto(movimiento.getMonto());
+                    movCliente.setTipoMovimientos(movimiento.getTipoMovimientos());
+                    aux.add(movCliente);
+                }else if (movimiento.getProveedor() != null
+                            && movimiento.getProveedor().getId() == id){
+                    Movimiento movProveedor = new Movimiento();
+                    movProveedor.setFecha(movimiento.getFecha());
+                    movProveedor.setDescripcion(movimiento.getDescripcion());
+                    movProveedor.setMonto(movimiento.getMonto());
+                    movProveedor.setTipoMovimientos(movimiento.getTipoMovimientos());
+                    aux.add(movProveedor);
+                }
             }
         }
+        return aux;
     }
 
     public ArrayList<DeudaXClienteProveedor> deudaxAcreedorMovimientos(Date fechaInicio, Date fechaFin) {
